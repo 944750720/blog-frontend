@@ -6,13 +6,13 @@ import {
 	Noto_Serif_SC,
 } from "next/font/google";
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
-import { cn } from "@/lib/utils";
 import { Toaster } from "react-hot-toast";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { cn } from "@/lib/utils";
 
 const crimsonPro = Crimson_Pro({
 	variable: "--font-crimson-pro",
