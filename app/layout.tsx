@@ -13,6 +13,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
 import { cn } from "@/lib/utils";
+import MswProvider from "./components/MswProvider";
 import SWRProvider from "./components/SWRProvider";
 
 const crimsonPro = Crimson_Pro({
@@ -83,13 +84,15 @@ export default async function RootLayout({
 				)}
 			>
 				<ThemeProvider>
-					<SWRProvider>
-						<NextIntlClientProvider locale={locale} messages={messages}>
-							<Toaster position="top-center" reverseOrder={false} />
-							{children}
-							<SpeedInsights />
-						</NextIntlClientProvider>
-					</SWRProvider>
+					<MswProvider>
+						<SWRProvider>
+							<NextIntlClientProvider locale={locale} messages={messages}>
+								<Toaster position="top-center" reverseOrder={false} />
+								{children}
+								<SpeedInsights />
+							</NextIntlClientProvider>
+						</SWRProvider>
+					</MswProvider>
 				</ThemeProvider>
 			</body>
 		</html>
