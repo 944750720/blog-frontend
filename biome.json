@@ -42,7 +42,12 @@
 	},
 	"overrides": [
 		{
-			"includes": [".next/**", "out/**", "build/**"],
+			"includes": [
+				".next/**",
+				"out/**",
+				"build/**",
+				"public/mockServiceWorker.js"
+			],
 			"linter": {
 				"enabled": false
 			},
