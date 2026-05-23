@@ -32,5 +32,5 @@ export default function MswProvider({
 		return null;
 	}
 
-	return <>{children}</>;
+	return children;
 }

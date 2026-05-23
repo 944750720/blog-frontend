@@ -76,7 +76,7 @@ export default async function RootLayout({
 				</Script>
 			</head>
 			<body
-				data-local={locale}
+				data-locale={locale}
 				className={cn(
 					"flex justify-center bg-background text-foreground antialiased",
 					crimsonPro.variable,
