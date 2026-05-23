@@ -26,11 +26,12 @@ When asked to review code, follow this systematic process:
 3. **Verify semantic HTML** by looking for appropriate element usage
 4. **Check for code duplication** by searching for similar patterns
 5. **Assess SOLID principles** in the code structure
-6. **Verify design tokens** are used instead of hardcoded colors
-7. **Check shadcn/ui usage** — prefer existing components over custom implementations
-8. **Verify TypeScript quality** and type safety
-9. **Check biome passes** — run `pnpm biome check .`
-10. **Provide structured feedback** with specific line numbers and recommendations
+6. **Check for redundant elements** — unnecessary wrappers or mergeable siblings
+7. **Verify design tokens** are used instead of hardcoded colors
+8. **Check shadcn/ui usage** — prefer existing components over custom implementations
+9. **Verify TypeScript quality** and type safety
+10. **Check biome passes** — run `pnpm biome check .`
+11. **Provide structured feedback** with specific line numbers and recommendations
 
 ## Comprehensive Review Checklist
 
@@ -91,7 +92,15 @@ When asked to review code, follow this systematic process:
 - [ ] Interactive elements are keyboard accessible
 - [ ] Images have alt text
 
-### 9. Lint and Format
+### 9. Redundant Elements
+
+- [ ] No unnecessary wrapper `<div>` that could be removed or merged with parent/child
+- [ ] No sibling elements that could be merged into one (e.g., two consecutive `<div>` with no logical separation)
+- [ ] No single-child wrapper where the child could replace it
+- [ ] Fragment `<>...</>` used instead of a wrapper `<div>` when only grouping without layout/style
+- [ ] No redundant `<div>` used just for `className` where the child could take it directly
+
+### 10. Lint and Format
 
 - [ ] `pnpm biome check .` passes with no errors
 - [ ] No unused imports or variables
