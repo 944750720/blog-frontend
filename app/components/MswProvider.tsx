@@ -1,36 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function MswProvider({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
-	const [ready, setReady] = useState(false);
-
 	useEffect(() => {
-		async function enableMocking() {
-			if (process.env.NODE_ENV !== "development") {
-				setReady(true);
-				return;
-			}
+		if (process.env.NODE_ENV !== "development") return;
 
-			const { worker } = await import("@/app/lib/services/mock/browser");
-
-			await worker.start({
-				onUnhandledRequest: "bypass",
-			});
-
-			setReady(true);
-		}
-
-		enableMocking();
+		import("@/app/lib/services/mock/browser").then(({ worker }) => {
+			worker.start({ onUnhandledRequest: "bypass" });
+		});
 	}, []);
-
-	if (!ready) {
-		return null;
-	}
 
 	return children;
 }
