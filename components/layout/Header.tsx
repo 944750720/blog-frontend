@@ -1,9 +1,8 @@
 "use client";
 
-import { Languages, Menu, Search } from "lucide-react";
+import { Menu, Search } from "lucide-react";
+import { motion } from "motion/react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useLocale } from "next-intl";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,34 +13,20 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
-import { useThemeCycle } from "@/hooks/useThemeCycle";
 import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export function Header() {
-	const { theme, cycleTheme, ThemeIcon } = useThemeCycle();
 	const { isNotTop, show } = useScrollDirection();
-	const locale = useLocale();
-	const router = useRouter();
-	const pathname = usePathname();
 	const [mobileOpen, setMobileOpen] = useState(false);
 
-	const switchLocale = () => {
-		const next = locale === "zh" ? "en" : "zh";
-		const segments = pathname.split("/");
-		// pathname starts with /zh or /en
-		if (segments[1] === "zh" || segments[1] === "en") {
-			segments[1] = next;
-		}
-		router.push(segments.join("/"));
-	};
-
 	return (
-		<header
-			className="sticky top-4 z-50 transition-all duration-300"
-			style={{
-				transform: show ? "translateY(0)" : "translateY(-5rem)",
-			}}
+		<motion.header
+			className="sticky top-4 z-50"
+			animate={{ y: show ? 0 : -80 }}
+			transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
 		>
 			<div
 				className={cn(
@@ -84,24 +69,10 @@ export function Header() {
 					</Button>
 
 					{/* Theme toggle */}
-					<Button
-						variant="ghost"
-						size="icon"
-						onClick={cycleTheme}
-						aria-label={`Theme: ${theme}`}
-					>
-						<ThemeIcon className="size-4" />
-					</Button>
+					<ThemeSwitcher />
 
 					{/* Language toggle */}
-					<Button
-						variant="ghost"
-						size="icon"
-						onClick={switchLocale}
-						aria-label="Switch language"
-					>
-						<Languages className="size-4" />
-					</Button>
+					<LanguageSwitcher />
 
 					{/* Mobile menu */}
 					<Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -135,6 +106,6 @@ export function Header() {
 					</Sheet>
 				</div>
 			</div>
-		</header>
+		</motion.header>
 	);
 }
