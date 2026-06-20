@@ -1,8 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { GithubIcon } from "@/components/icons/lucide-github";
+import { usePathname } from "@/i18n/navigation";
 import { siteConfig } from "@/lib/config";
 
 export function Footer() {
+	const pathname = usePathname();
+	if (pathname === "/") return null;
+
 	return (
 		<footer className="mx-auto mb-5 mt-16 w-full">
 			<div className="border-t pt-5 flex items-center gap-y-3 max-sm:flex-col sm:justify-between">

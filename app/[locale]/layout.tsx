@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import MswProvider from "../components/MswProvider";
 import SWRProvider from "../components/SWRProvider";
 
@@ -20,6 +21,7 @@ export default async function LocaleLayout({
 			<NextIntlClientProvider locale={locale} messages={messages}>
 				<MswProvider>
 					<SWRProvider>
+						<ScrollProgress className="h-0.5 bg-none bg-foreground" />
 						<div className="w-full max-w-[70rem] min-h-dvh flex flex-col justify-between px-4 sm:px-7 lg:px-10">
 							<Header />
 							<main className="flex-1 w-full">{children}</main>

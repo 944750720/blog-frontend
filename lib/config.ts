@@ -1,6 +1,7 @@
 export const siteConfig = {
 	title: "CHJ Blog",
 	description: "A blog built with Next.js",
+	email: "lupangdewuyu@gmail.com",
 	header: {
 		menu: [
 			{ title: "Blog", link: "/blog" },

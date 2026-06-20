@@ -32,7 +32,7 @@ export function Header() {
 				className={cn(
 					"flex items-center justify-between rounded-2xl px-4 py-2 transition-all duration-300",
 					{
-						"border border-border bg-background/80 backdrop-blur shadow-sm md:mx-[8%]":
+						"border border-border bg-cream/80 backdrop-blur shadow-sm md:mx-[8%] dark:bg-background/80":
 							isNotTop,
 						"border border-transparent": !isNotTop,
 					},

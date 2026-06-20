@@ -1,9 +1,17 @@
 import {
+	Bebas_Neue,
 	Crimson_Pro,
 	JetBrains_Mono,
 	Noto_Sans_SC,
 	Noto_Serif_SC,
 } from "next/font/google";
+
+export const bebasNeue = Bebas_Neue({
+	variable: "--font-bebas-neue",
+	subsets: ["latin"],
+	weight: "400",
+	display: "swap",
+});
 
 export const crimsonPro = Crimson_Pro({
 	variable: "--font-crimson-pro",
@@ -33,6 +41,7 @@ export const notoSerifSC = Noto_Serif_SC({
 });
 
 export const fontVariables = [
+	bebasNeue.variable,
 	crimsonPro.variable,
 	jetBrainsMono.variable,
 	notoSansSC.variable,

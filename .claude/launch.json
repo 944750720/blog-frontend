@@ -1,0 +1,12 @@
+{
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "Next.js dev (Turbopack)",
+			"runtimeExecutable": "fnm",
+			"runtimeArgs": ["exec", "--using=22", "--", "pnpm", "dev"],
+			"autoPort": false,
+			"port": 3000
+		}
+	]
+}
