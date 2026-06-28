@@ -6,8 +6,8 @@ import { Toaster } from "react-hot-toast";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import MswProvider from "../components/MswProvider";
-import SWRProvider from "../components/SWRProvider";
+import MswProvider from "@/components/providers/MswProvider";
+import SWRProvider from "@/components/providers/SWRProvider";
 
 export default async function LocaleLayout({
 	children,
