@@ -107,7 +107,7 @@ export function CodeBlockView({ node }: NodeViewProps) {
 				ref={codeRef}
 				className={cn("code-body", { "code-body-collapsed": collapsed })}
 			>
-				<NodeViewContent as="code" className={`language-${language}`} />
+				<NodeViewContent<"code"> as="code" className={`language-${language}`} />
 			</div>
 		</NodeViewWrapper>
 	);
