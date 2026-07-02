@@ -54,6 +54,29 @@
 	--radius-2xl: calc(var(--radius) * 1.8);
 	--radius-3xl: calc(var(--radius) * 2.2);
 	--radius-4xl: calc(var(--radius) * 2.6);
+	--color-syntax-keyword: var(--syntax-keyword);
+	--color-syntax-string: var(--syntax-string);
+	--color-syntax-number: var(--syntax-number);
+	--color-syntax-function: var(--syntax-function);
+	--color-syntax-comment: var(--syntax-comment);
+	--color-syntax-tag: var(--syntax-tag);
+	--color-syntax-variable: var(--syntax-variable);
+	--color-syntax-operator: var(--syntax-operator);
+	--color-code-bg: var(--code-bg);
+	--color-code-line-number: var(--code-line-number);
+	--color-code-btn-bg: var(--code-btn-bg);
+	--color-code-btn-text: var(--code-btn-text);
+	--animate-blink-cursor: blink-cursor 1.2s step-end infinite;
+	@keyframes blink-cursor {
+		0%,
+		49% {
+			opacity: 1;
+		}
+		50%,
+		100% {
+			opacity: 0;
+		}
+	}
 }
 
 :root {
@@ -97,6 +120,18 @@
 	--footer-dark: oklch(0.145 0 0);
 	--overlay: oklch(0 0 0);
 	--overlay-foreground: oklch(1 0 0);
+	--syntax-keyword: oklch(0.55 0.2 290);
+	--syntax-string: oklch(0.55 0.17 155);
+	--syntax-number: oklch(0.6 0.16 55);
+	--syntax-function: oklch(0.55 0.2 250);
+	--syntax-comment: oklch(0.55 0 0);
+	--syntax-tag: oklch(0.55 0.2 25);
+	--syntax-variable: oklch(0.4 0 0);
+	--syntax-operator: oklch(0.4 0 0);
+	--code-bg: oklch(0.96 0 0);
+	--code-line-number: oklch(0.65 0 0);
+	--code-btn-bg: oklch(0.4 0 0);
+	--code-btn-text: oklch(0.98 0 0);
 }
 
 .dark {
@@ -138,6 +173,18 @@
 	--footer-dark: oklch(0.12 0 0);
 	--overlay: oklch(0 0 0);
 	--overlay-foreground: oklch(1 0 0);
+	--syntax-keyword: oklch(0.7 0.15 290);
+	--syntax-string: oklch(0.7 0.15 155);
+	--syntax-number: oklch(0.75 0.12 55);
+	--syntax-function: oklch(0.7 0.15 250);
+	--syntax-comment: oklch(0.55 0 0);
+	--syntax-tag: oklch(0.7 0.15 25);
+	--syntax-variable: oklch(0.8 0 0);
+	--syntax-operator: oklch(0.8 0 0);
+	--code-bg: oklch(0.22 0 0);
+	--code-line-number: oklch(0.5 0 0);
+	--code-btn-bg: oklch(0.35 0 0);
+	--code-btn-text: oklch(0.9 0 0);
 }
 
 @layer base {
@@ -165,4 +212,248 @@
 
 .animate {
 	animation: fade-in-up 0.3s ease-out both;
+}
+
+/* TipTap Editor Content Styles */
+.tiptap {
+	outline: none;
+	min-height: 0;
+
+	/* Headings */
+	& h1 {
+		@apply text-3xl font-bold text-foreground mb-4 mt-6;
+	}
+	& h2 {
+		@apply text-2xl font-bold text-foreground mb-3 mt-5;
+	}
+	& h3 {
+		@apply text-xl font-semibold text-foreground mb-2 mt-4;
+	}
+
+	/* Text */
+	& p {
+		@apply text-foreground leading-7 mb-4;
+	}
+	& strong {
+		@apply text-foreground font-bold;
+	}
+	& em {
+		@apply text-foreground italic;
+	}
+	& u {
+		@apply underline decoration-foreground;
+	}
+	& s {
+		@apply line-through text-muted-foreground;
+	}
+
+	/* Inline code */
+	& code {
+		@apply text-foreground bg-muted px-1.5 py-0.5 rounded text-sm font-mono leading-relaxed;
+		&::before,
+		&::after {
+			content: "";
+		}
+	}
+
+	/* Links */
+	& a {
+		@apply text-primary underline decoration-primary underline-offset-2 cursor-pointer transition-colors;
+	}
+
+	/* Blockquote */
+	& blockquote {
+		@apply border-l-4 border-primary pl-4 py-2 italic text-muted-foreground bg-muted my-4;
+	}
+
+	/* Lists */
+	& ul {
+		@apply list-disc list-outside ml-6 my-4 text-foreground;
+	}
+	& ol {
+		@apply list-decimal list-outside ml-6 my-4 text-foreground;
+	}
+	& li {
+		@apply my-1 leading-7 text-foreground;
+		& > ul,
+		& > ol {
+			@apply my-2;
+		}
+	}
+
+	/* Table */
+	& table {
+		@apply w-full border-collapse my-4 text-sm overflow-x-auto block max-w-full;
+	}
+	& th {
+		@apply border border-border bg-muted px-4 py-2 text-left font-semibold text-foreground whitespace-nowrap;
+	}
+	& td {
+		@apply border border-border px-4 py-2 text-foreground;
+	}
+	& tr:nth-child(even) {
+		@apply bg-muted/50;
+	}
+
+	/* Horizontal rule */
+	& hr {
+		@apply border-0 border-t border-border my-6;
+	}
+
+	/* Task list */
+	& .task-list {
+		@apply list-none ml-0 pl-0 my-4;
+	}
+	& .task-item {
+		@apply flex items-start gap-2 my-1;
+		& input {
+			@apply mt-1.5 cursor-pointer accent-primary;
+		}
+		&[data-checked="true"] p {
+			@apply line-through text-muted-foreground;
+		}
+	}
+
+	/* Code block (NodeView handles toolbar/line-numbers, these are base pre/code styles) */
+	& pre {
+		@apply rounded-sm p-0 my-4 text-left whitespace-pre font-mono text-sm leading-6 text-foreground relative;
+		& code {
+			@apply bg-transparent p-0 m-0 text-inherit block leading-6 text-sm font-mono whitespace-pre;
+			&::before,
+			&::after {
+				content: "";
+			}
+		}
+	}
+
+	/* Syntax highlighting */
+	& .hljs-comment {
+		@apply text-syntax-comment italic;
+	}
+	& .hljs-keyword {
+		@apply text-syntax-keyword font-semibold;
+	}
+	& .hljs-string {
+		@apply text-syntax-string;
+	}
+	& .hljs-number {
+		@apply text-syntax-number;
+	}
+	& .hljs-function,
+	& .hljs-title {
+		@apply text-syntax-function;
+	}
+	& .hljs-variable,
+	& .hljs-attr {
+		@apply text-syntax-variable;
+	}
+	& .hljs-tag {
+		@apply text-syntax-tag;
+	}
+	& .hljs-operator {
+		@apply text-syntax-operator;
+	}
+	& .hljs-regexp {
+		@apply text-syntax-keyword;
+	}
+	& .hljs-class,
+	& .hljs-built_in,
+	& .hljs-type,
+	& .hljs-name {
+		@apply text-foreground;
+	}
+
+	/* Images */
+	& img {
+		@apply max-w-full max-h-96 h-auto rounded-sm my-4 shadow-md block cursor-pointer object-contain;
+		@apply transition-[box-shadow,transform,filter] duration-300;
+		&:hover {
+			@apply shadow-xl scale-[1.02] brightness-95;
+		}
+	}
+	& figure.image-figure {
+		@apply my-4 block w-fit max-w-full;
+		& img {
+			@apply max-w-full max-h-96 h-auto rounded-sm shadow-md block cursor-pointer object-contain;
+			@apply transition-[box-shadow,transform,filter] duration-300;
+			&:hover {
+				@apply shadow-xl scale-[1.02] brightness-95;
+			}
+		}
+	}
+	& figcaption.image-caption {
+		@apply text-center text-sm text-muted-foreground italic mt-2 px-2;
+	}
+
+	/* Video */
+	& video {
+		@apply max-w-full max-h-96 h-auto rounded-sm my-4 shadow-md block;
+	}
+	& figure.video-figure {
+		@apply my-4 block w-fit max-w-full;
+		& video {
+			@apply max-w-full max-h-96 h-auto rounded-sm shadow-md block;
+		}
+	}
+	& figcaption.video-caption {
+		@apply text-center text-sm text-muted-foreground italic mt-2 px-2;
+	}
+
+	/* Audio */
+	& audio {
+		@apply max-w-full my-4 rounded-sm block;
+	}
+	& figure.audio-figure {
+		@apply my-4 block w-fit max-w-full;
+		& audio {
+			@apply max-w-full my-0 rounded-sm block;
+		}
+	}
+	& figcaption.audio-caption {
+		@apply text-center text-sm text-muted-foreground italic mt-2 px-2;
+	}
+}
+
+/* Code block NodeView styles */
+.code-block-wrapper {
+	@apply rounded-sm my-4 overflow-hidden border border-border relative;
+	background-color: var(--code-bg);
+	font-family: var(--font-mono);
+}
+
+.code-toolbar {
+	@apply sticky top-0 flex items-center justify-end gap-2 pl-2 py-1.5 z-20;
+	background-color: var(--code-bg);
+	border-bottom: 1px solid var(--border);
+}
+
+.language-label {
+	@apply mr-auto px-2 py-0.5 text-xs rounded-sm font-medium;
+	background-color: var(--primary);
+	color: var(--primary-foreground);
+}
+
+.code-btn {
+	@apply flex items-center gap-1 px-2 py-0.5 text-xs rounded cursor-pointer;
+	@apply transition-all duration-200 hover:brightness-125 active:scale-95;
+	background-color: var(--code-btn-bg);
+	color: var(--code-btn-text);
+}
+
+.code-btn-active {
+	background-color: var(--syntax-keyword);
+}
+
+.code-btn-copied {
+	background-color: var(--syntax-string);
+}
+
+.code-body {
+	@apply overflow-x-auto overflow-y-hidden pl-2 py-4;
+	scrollbar-gutter: stable;
+}
+
+.code-body-collapsed {
+	max-height: 300px;
+	overflow-y: hidden;
 }

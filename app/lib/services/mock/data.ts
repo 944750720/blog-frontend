@@ -1,11 +1,23 @@
-import type { Blog, BlogComment, Tag } from "../../../types/blog";
-import type { Board, BoardComment } from "../../../types/board";
-import type { Coffee } from "../../../types/coffee";
-import type { Friend, FriendList } from "../../../types/friend";
-import type { Media } from "../../../types/media";
-import type { Section } from "../../../types/section";
-import type { Seo } from "../../../types/seo";
-import type { User } from "../../../types/user";
+import type {
+	Blog,
+	BlogAudioResponse,
+	BlogComment,
+	BlogCommentItem,
+	BlogCommentListResponse,
+	BlogDetailsResponse,
+	BlogListItem,
+	BlogNavigationResponse,
+	BlogStatsResponse,
+	BlogSummaryResponse,
+	Tag,
+} from "@/app/types/blog";
+import type { Board, BoardComment } from "@/app/types/board";
+import type { Coffee } from "@/app/types/coffee";
+import type { Friend, FriendList } from "@/app/types/friend";
+import type { Media } from "@/app/types/media";
+import type { Section } from "@/app/types/section";
+import type { Seo } from "@/app/types/seo";
+import type { User } from "@/app/types/user";
 
 // User
 export const mockUser: User = {
@@ -54,6 +66,7 @@ export const mockBlogs: Blog[] = [
 // BlogComment
 export const mockBlogComment: BlogComment = {
 	comment_id: 1,
+	blog_id: 1,
 	user_id: 2,
 	parent_id: 0,
 	comment: "Great post!",
@@ -182,6 +195,214 @@ export const mockBoardComment: BoardComment = {
 	parent_id: 0,
 	comment: "Hello everyone!",
 	created_at: "2024-01-01T00:00:00Z",
+};
+
+// Blog list items (with tags and stats)
+export const mockBlogListItem: BlogListItem = {
+	blog_id: 1,
+	blog_slug: "hello-world",
+	blog_title: "Hello World",
+	blog_description: "My first blog post about web development",
+	cover_url: "https://picsum.photos/800/400?random=1",
+	blog_tags: [
+		{ tag_id: 1, tag_title: "JavaScript" },
+		{ tag_id: 2, tag_title: "TypeScript" },
+	],
+	blog_stats: { views: 100, likes: 10, comments: 5, saves: 3 },
+	created_at: "2024-06-01T00:00:00Z",
+};
+
+export const mockBlogListItems: BlogListItem[] = [
+	mockBlogListItem,
+	{
+		...mockBlogListItem,
+		blog_id: 2,
+		blog_slug: "getting-started-with-nextjs",
+		blog_title: "Getting Started with Next.js",
+		blog_description:
+			"A comprehensive guide to building modern web apps with Next.js 16",
+		cover_url: "https://picsum.photos/800/400?random=2",
+		blog_tags: [{ tag_id: 3, tag_title: "React" }],
+		blog_stats: { views: 250, likes: 25, comments: 8, saves: 12 },
+		created_at: "2024-06-15T00:00:00Z",
+	},
+	{
+		...mockBlogListItem,
+		blog_id: 3,
+		blog_slug: "tailwind-css-tips",
+		blog_title: "Tailwind CSS Tips & Tricks",
+		blog_description: "Practical tips for writing better Tailwind CSS",
+		cover_url: "https://picsum.photos/800/400?random=3",
+		blog_tags: [
+			{ tag_id: 4, tag_title: "CSS" },
+			{ tag_id: 5, tag_title: "Tailwind" },
+		],
+		blog_stats: { views: 180, likes: 15, comments: 3, saves: 7 },
+		created_at: "2024-07-01T00:00:00Z",
+	},
+	{
+		...mockBlogListItem,
+		blog_id: 4,
+		blog_slug: "typescript-best-practices",
+		blog_title: "TypeScript Best Practices",
+		blog_description: "Writing cleaner and safer TypeScript code",
+		cover_url: "https://picsum.photos/800/400?random=4",
+		blog_tags: [{ tag_id: 2, tag_title: "TypeScript" }],
+		blog_stats: { views: 320, likes: 40, comments: 12, saves: 18 },
+		created_at: "2024-07-15T00:00:00Z",
+	},
+];
+
+export const mockBlogDetails: BlogDetailsResponse = {
+	blog_id: 1,
+	blog_title: "Hello World",
+	blog_description: "My first blog post about web development",
+	cover_url: "https://picsum.photos/800/400?random=1",
+	blog_content: {
+		type: "doc",
+		content: [
+			{
+				type: "heading",
+				attrs: { level: 2 },
+				content: [{ type: "text", text: "Introduction" }],
+			},
+			{
+				type: "paragraph",
+				content: [
+					{
+						type: "text",
+						text: "Welcome to my blog! This is a sample post demonstrating various content features.",
+					},
+				],
+			},
+			{
+				type: "heading",
+				attrs: { level: 2 },
+				content: [{ type: "text", text: "Code Example" }],
+			},
+			{
+				type: "codeBlock",
+				attrs: { language: "typescript" },
+				content: [
+					{
+						type: "text",
+						text: 'const greeting = "Hello, World!";\nconsole.log(greeting);',
+					},
+				],
+			},
+			{
+				type: "heading",
+				attrs: { level: 2 },
+				content: [{ type: "text", text: "Conclusion" }],
+			},
+			{
+				type: "paragraph",
+				content: [
+					{
+						type: "text",
+						text: "Thanks for reading! Stay tuned for more posts.",
+					},
+				],
+			},
+		],
+	},
+	is_saved: false,
+	blog_tags: [
+		{ tag_id: 1, tag_slug: "javascript", tag_title: "JavaScript" },
+		{ tag_id: 2, tag_slug: "typescript", tag_title: "TypeScript" },
+	],
+	blog_stats: { views: 100, likes: 10, comments: 5, saves: 3 },
+	created_at: "2024-06-01T00:00:00Z",
+	updated_at: "2024-06-10T00:00:00Z",
+};
+
+export const mockBlogStats: BlogStatsResponse = {
+	views: 100,
+	likes: 10,
+	comments: 5,
+	saves: 3,
+};
+
+export const mockBlogNavigation: BlogNavigationResponse = {
+	previous: {
+		section_slug: "blog",
+		blog_slug: "previous-post",
+		blog_title: "Previous Post Title",
+	},
+	next: {
+		section_slug: "blog",
+		blog_slug: "next-post",
+		blog_title: "Next Post Title",
+	},
+};
+
+export const mockBlogSummary: BlogSummaryResponse = {
+	summary:
+		"This blog post introduces web development concepts and demonstrates various content features including code examples, headings, and paragraphs.",
+};
+
+export const mockBlogAudio: BlogAudioResponse = {
+	blog_id: 1,
+	tts: "https://example.com/audio/blog-1.mp3",
+};
+
+export const mockBlogCommentItems: BlogCommentItem[] = [
+	{
+		comment_id: 1,
+		user_id: 2,
+		username: "reader1",
+		avatar_url: "https://picsum.photos/40/40?random=10",
+		user_role: "user",
+		city: "Tokyo",
+		parent_id: 0,
+		comment: "Great article! Very informative.",
+		created_at: "2024-06-02T10:00:00Z",
+		children: [
+			{
+				comment_id: 3,
+				user_id: 1,
+				username: "admin",
+				avatar_url: "https://picsum.photos/40/40?random=11",
+				user_role: "admin",
+				city: "Shanghai",
+				parent_id: 1,
+				comment: "Thanks for reading!",
+				created_at: "2024-06-02T12:00:00Z",
+				children: [
+					{
+						comment_id: 5,
+						user_id: 2,
+						username: "reader1",
+						avatar_url: "https://picsum.photos/40/40?random=10",
+						user_role: "user",
+						city: "Tokyo",
+						parent_id: 3,
+						comment: "Keep up the good work!",
+						created_at: "2024-06-02T14:00:00Z",
+					},
+				],
+			},
+		],
+	},
+	{
+		comment_id: 2,
+		user_id: 3,
+		username: "reader2",
+		avatar_url: "https://picsum.photos/40/40?random=12",
+		user_role: "user",
+		city: "Beijing",
+		parent_id: 0,
+		comment: "Looking forward to more posts like this.",
+		created_at: "2024-06-03T08:00:00Z",
+	},
+];
+
+export const mockBlogCommentListResponse: BlogCommentListResponse = {
+	comments: mockBlogCommentItems,
+	pagination: {
+		next_cursor: null,
+		has_next: false,
+	},
 };
 
 // Auth

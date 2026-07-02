@@ -35,3 +35,8 @@ export interface CoffeeQueryParams extends PaginationParams {
 	currency?: "CNY" | "JPY" | "USD";
 	status?: string;
 }
+
+export interface CursorPaginationParams {
+	limit: number;
+	cursor?: string;
+}

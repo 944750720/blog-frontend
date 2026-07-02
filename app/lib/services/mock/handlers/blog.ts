@@ -1,19 +1,64 @@
 import { HttpResponse, http } from "msw";
 import { BASE } from "../constants";
-import { mockBlog, mockBlogComment, mockBlogs } from "../data";
+import {
+	mockBlog,
+	mockBlogAudio,
+	mockBlogComment,
+	mockBlogCommentListResponse,
+	mockBlogDetails,
+	mockBlogListItems,
+	mockBlogNavigation,
+	mockBlogStats,
+	mockBlogSummary,
+} from "../data";
 
 export const blogHandlers = [
 	http.get(`${BASE}/api/v1/blogs`, ({ request }) => {
 		const url = new URL(request.url);
 		const page = Number(url.searchParams.get("page") ?? 1);
-		const limit = Number(url.searchParams.get("limit") ?? 10);
+		const limit = Number(url.searchParams.get("limit") ?? 6);
 		return HttpResponse.json({
-			data: mockBlogs,
-			total: mockBlogs.length,
+			data: mockBlogListItems,
+			total: 4,
 			page,
 			limit,
 			totalPages: 1,
 		});
+	}),
+
+	http.get(`${BASE}/api/v1/blogs/:slug/details`, ({ params }) => {
+		return HttpResponse.json({
+			...mockBlogDetails,
+			blog_slug: params.slug,
+		});
+	}),
+
+	http.get(`${BASE}/api/v1/blogs/:blogId/stats`, () => {
+		return HttpResponse.json(mockBlogStats);
+	}),
+
+	http.get(`${BASE}/api/v1/blogs/:blogId/navigation`, () => {
+		return HttpResponse.json(mockBlogNavigation);
+	}),
+
+	http.get(`${BASE}/api/v1/blogs/:blogId/summary`, () => {
+		return HttpResponse.json(mockBlogSummary);
+	}),
+
+	http.get(`${BASE}/api/v1/blogs/:blogId/tts`, () => {
+		return HttpResponse.json(mockBlogAudio);
+	}),
+
+	http.post(`${BASE}/api/v1/blogs/:blogId/like`, () => {
+		return HttpResponse.json({ data: true, message: "Blog liked" });
+	}),
+
+	http.post(`${BASE}/api/v1/blogs/:blogId/save`, () => {
+		return HttpResponse.json({ data: true, message: "Blog saved" });
+	}),
+
+	http.get(`${BASE}/api/v1/blogs/:blogId/comments/cursor`, () => {
+		return HttpResponse.json(mockBlogCommentListResponse);
 	}),
 
 	http.get(`${BASE}/api/v1/blogs/:slug`, ({ params }) => {

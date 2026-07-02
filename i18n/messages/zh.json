@@ -1,1 +1,71 @@
-{}
+{
+	"common": {
+		"loading": "加载中...",
+		"loadFailed": "加载失败",
+		"loadFailedMessage": "数据加载失败，请稍后重试",
+		"notFound": "未找到内容",
+		"notFoundMessage": "暂无相关内容",
+		"noMoreContent": "没有更多了",
+		"createdAt": "创建于",
+		"updatedAt": "更新于",
+		"summary": "摘要",
+		"submit": "提交",
+		"cancel": "取消",
+		"delete": "删除",
+		"edit": "编辑",
+		"reply": "回复",
+		"save": "保存",
+		"loadMore": "加载更多",
+		"anonymous": "匿名用户"
+	},
+	"blog": {
+		"title": "博客",
+		"description": "分享技术笔记和个人想法",
+		"views": "浏览",
+		"likes": "点赞",
+		"comments": "评论",
+		"saves": "收藏",
+		"likeFailed": "点赞失败",
+		"saveFailed": "收藏失败",
+		"previousPost": "上一篇",
+		"nextPost": "下一篇",
+		"action": {
+			"summarySubtitle": "AI 生成内容摘要",
+			"audio": {
+				"play": "播放音频",
+				"pause": "暂停音频",
+				"resume": "继续播放",
+				"playDescription": "收听文章朗读",
+				"pauseDescription": "暂停播放",
+				"resumeDescription": "继续上次播放"
+			}
+		}
+	},
+	"comment": {
+		"title": "评论",
+		"placeholder": "写下你的评论...",
+		"replyTo": "回复 {username}",
+		"editComment": "编辑评论",
+		"deleteConfirm": "确定要删除这条评论吗？",
+		"loginRequired": "请登录后评论",
+		"maxLength": "评论不能超过 {max} 个字符",
+		"empty": "评论不能为空",
+		"replies": "{count} 条回复"
+	},
+	"content": {
+		"toc": "目录",
+		"tocCollapse": "收起目录",
+		"tocExpand": "展开目录",
+		"copyCode": "复制代码",
+		"codeCopied": "已复制",
+		"codeExpand": "展开代码",
+		"codeCollapse": "收起代码",
+		"imagePreview": {
+			"zoomIn": "放大",
+			"zoomOut": "缩小",
+			"rotate": "旋转",
+			"reset": "重置",
+			"close": "关闭"
+		}
+	}
+}

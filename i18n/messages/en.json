@@ -1,1 +1,71 @@
-{}
+{
+	"common": {
+		"loading": "Loading...",
+		"loadFailed": "Load Failed",
+		"loadFailedMessage": "Failed to load data. Please try again later.",
+		"notFound": "Not Found",
+		"notFoundMessage": "No content available",
+		"noMoreContent": "No more content",
+		"createdAt": "Created",
+		"updatedAt": "Updated",
+		"summary": "Summary",
+		"submit": "Submit",
+		"cancel": "Cancel",
+		"delete": "Delete",
+		"edit": "Edit",
+		"reply": "Reply",
+		"save": "Save",
+		"loadMore": "Load More",
+		"anonymous": "Anonymous"
+	},
+	"blog": {
+		"title": "Blog",
+		"description": "Sharing technical notes and personal thoughts",
+		"views": "Views",
+		"likes": "Likes",
+		"comments": "Comments",
+		"saves": "Saves",
+		"likeFailed": "Failed to like",
+		"saveFailed": "Failed to save",
+		"previousPost": "Previous",
+		"nextPost": "Next",
+		"action": {
+			"summarySubtitle": "AI-generated content summary",
+			"audio": {
+				"play": "Play Audio",
+				"pause": "Pause Audio",
+				"resume": "Resume",
+				"playDescription": "Listen to article narration",
+				"pauseDescription": "Pause playback",
+				"resumeDescription": "Resume from last position"
+			}
+		}
+	},
+	"comment": {
+		"title": "Comments",
+		"placeholder": "Write your comment...",
+		"replyTo": "Reply to {username}",
+		"editComment": "Edit Comment",
+		"deleteConfirm": "Are you sure you want to delete this comment?",
+		"loginRequired": "Please log in to comment",
+		"maxLength": "Comment cannot exceed {max} characters",
+		"empty": "Comment cannot be empty",
+		"replies": "{count} replies"
+	},
+	"content": {
+		"toc": "Table of Contents",
+		"tocCollapse": "Collapse",
+		"tocExpand": "Expand",
+		"copyCode": "Copy",
+		"codeCopied": "Copied!",
+		"codeExpand": "Expand code",
+		"codeCollapse": "Collapse code",
+		"imagePreview": {
+			"zoomIn": "Zoom In",
+			"zoomOut": "Zoom Out",
+			"rotate": "Rotate",
+			"reset": "Reset",
+			"close": "Close"
+		}
+	}
+}

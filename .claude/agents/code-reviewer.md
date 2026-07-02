@@ -38,7 +38,12 @@ If you need to check design system compliance, DRY principles, or other concerns
 
 **Refer to [CLAUDE.md](../../CLAUDE.md) for ALL code style rules and standards.**
 
-Apply every rule from CLAUDE.md's "Code Style Rules" section to the staged files.
+Apply every rule from CLAUDE.md's "Code Style Rules" section to the staged files, including but not limited to:
+
+- **TipTap / ProseMirror:** Flag any use of `document.querySelector(".ProseMirror")` or similar global DOM queries to access the editor. Must use `editor.view.dom` instead. Event handling must use `editorProps` (e.g. `handleClick`, `handleDOMEvents`), not manual `addEventListener`.
+- **Accessibility:** SVG icons in buttons with visible text must have `aria-hidden="true"`. Interactive elements (buttons, links) with icon-only content must have `aria-label`. Hardcoded English strings in `aria-label` should use i18n.
+- **Semantic HTML:** Verify `<section>`, `<header>`, `<article>`, `<nav>` are used instead of generic `<div>` wrappers.
+- **i18n:** User-facing strings (error messages, toasts, labels) must use translation keys, not hardcoded English/Chinese.
 
 ## Review Output Format
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { Menu, Search } from "lucide-react";
-import { motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -19,15 +18,11 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export function Header() {
-	const { isNotTop, show } = useScrollDirection();
+	const { isNotTop } = useScrollDirection();
 	const [mobileOpen, setMobileOpen] = useState(false);
 
 	return (
-		<motion.header
-			className="sticky top-4 z-50"
-			animate={{ y: show ? 0 : -80 }}
-			transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-		>
+		<header className="sticky top-4 z-50">
 			<div
 				className={cn(
 					"flex items-center justify-between rounded-2xl px-4 py-2 transition-all duration-300",
@@ -106,6 +101,6 @@ export function Header() {
 					</Sheet>
 				</div>
 			</div>
-		</motion.header>
+		</header>
 	);
 }

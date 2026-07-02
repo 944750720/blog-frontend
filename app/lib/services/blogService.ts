@@ -1,13 +1,19 @@
+import httpClient from "@/app/lib/http/client";
 import type {
 	Blog,
+	BlogAudioResponse,
 	BlogComment,
+	BlogCommentListResponse,
+	BlogDetailsResponse,
+	BlogNavigationResponse,
+	BlogStatsResponse,
+	BlogSummaryResponse,
 	CreateBlog,
 	CreateBlogComment,
 	UpdateBlog,
 	UpdateBlogComment,
-} from "../../types/blog";
-import type { BlogQueryParams, PaginatedResponse } from "../../types/common";
-import httpClient from "../http/client";
+} from "@/app/types/blog";
+import type { BlogQueryParams, PaginatedResponse } from "@/app/types/common";
 
 export async function getBlogs(
 	params?: BlogQueryParams,
@@ -79,4 +85,67 @@ export async function updateBlogComment(
 
 export async function deleteBlogComment(commentId: number): Promise<void> {
 	await httpClient.delete(`/api/v1/blog-comments/${commentId}`);
+}
+
+export async function getBlogDetails(
+	slug: string,
+	userId?: number,
+): Promise<BlogDetailsResponse> {
+	const query = userId ? `?user_id=${userId}` : "";
+	const response = await httpClient.get(
+		`/api/v1/blogs/${slug}/details${query}`,
+	);
+	return response.data;
+}
+
+export async function getBlogStats(blogId: number): Promise<BlogStatsResponse> {
+	const response = await httpClient.get(`/api/v1/blogs/${blogId}/stats`);
+	return response.data;
+}
+
+export async function getBlogNavigation(
+	blogId: number,
+): Promise<BlogNavigationResponse> {
+	const response = await httpClient.get(`/api/v1/blogs/${blogId}/navigation`);
+	return response.data;
+}
+
+export async function getBlogSummary(
+	blogId: number,
+): Promise<BlogSummaryResponse> {
+	const response = await httpClient.get(`/api/v1/blogs/${blogId}/summary`);
+	return response.data;
+}
+
+export async function getBlogTTS(blogId: number): Promise<BlogAudioResponse> {
+	const response = await httpClient.get(`/api/v1/blogs/${blogId}/tts`);
+	return response.data;
+}
+
+export async function likeBlog(
+	blogId: number,
+): Promise<{ data: boolean; message: string }> {
+	const response = await httpClient.post(`/api/v1/blogs/${blogId}/like`);
+	return response.data;
+}
+
+export async function saveBlog(
+	blogId: number,
+): Promise<{ data: boolean; message: string }> {
+	const response = await httpClient.post(`/api/v1/blogs/${blogId}/save`);
+	return response.data;
+}
+
+export async function getBlogCommentList(
+	blogId: number,
+	limit = 10,
+	cursor?: string,
+): Promise<BlogCommentListResponse> {
+	const query = new URLSearchParams();
+	query.set("limit", String(limit));
+	if (cursor) query.set("cursor", cursor);
+	const response = await httpClient.get(
+		`/api/v1/blogs/${blogId}/comments/cursor?${query.toString()}`,
+	);
+	return response.data;
 }

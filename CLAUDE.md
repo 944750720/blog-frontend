@@ -91,11 +91,16 @@ Use `<header>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`, `<nav
 - Client Components only when needed (state, effects, event handlers)
 - Use `@/` alias for imports from `app/` directory
 
+### TipTap / ProseMirror
+
+- Never use `document.querySelector(".ProseMirror")` to access the editor DOM. Use `editor.view.dom` instead — it is a direct reference to the editor container and does not depend on internal class names.
+- For event handling (clicks, key events), use `editorProps.handleClick` / `handleDOMEvents` in the `useEditor` config instead of manual `addEventListener`.
+
 ### Code Quality
 
 - `pnpm biome check .` must pass (no errors)
 - No hardcoded colors — use design token classes
-- SVG icons: include `aria-label` or `<title>` for accessibility
+- SVG icons: include `aria-label` or `<title>` for accessibility; decorative icons next to visible text should use `aria-hidden="true"`
 - Use stable `key` values (unique IDs), never array indices for dynamic lists
 
 ## Theme System
